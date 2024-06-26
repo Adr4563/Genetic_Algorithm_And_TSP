@@ -4,7 +4,7 @@
 #include <cstdlib> // Para rand() y srand()
 #include <limits>
 #include <algorithm> // Para std::swap
-
+//city
 struct City {
     int x;
     int y;
