@@ -4,7 +4,7 @@
 #include <cstdlib> // Para rand() y srand()
 #include <limits>
 #include <algorithm> // Para std::swap
-//city
+
 struct City {
     int x;
     int y;
@@ -19,7 +19,7 @@ void generate_coordinates_ordered(City* cities, int city_size, int max) {
     }
 }
 
-void generate_bits(bool** pop, int pop_size, int bit_length) {
+void generate_bits(int** pop, int pop_size, int bit_length) {
     for (int i = 0; i < pop_size; ++i) {
         for (int j = 0; j < bit_length; ++j) {
             pop[i][j] = rand() % 2;
@@ -33,7 +33,7 @@ double between_cities(const City &city1, const City &city2) {
     return std::sqrt(dx * dx + dy * dy);
 }
 
-double calculate_total_distance(bool* bits, City* cities, int city_size) {
+double calculate_total_distance(int* bits, City* cities, int city_size) {
     double total_distance = 0.0;
     for (int i = 0; i < city_size - 1; ++i) {
         int city_idx1 = bits[i];
@@ -46,7 +46,7 @@ double calculate_total_distance(bool* bits, City* cities, int city_size) {
     return total_distance;
 }
 
-void calculate_fitness(bool** pop, float* fitness, double* distances, City* cities, int pop_size, int city_size) {
+void calculate_fitness(int** pop, float* fitness, double* distances, City* cities, int pop_size, int city_size) {
     for (int i = 0; i < pop_size; ++i) {
         double total_distance = calculate_total_distance(pop[i], cities, city_size);
         double fitness_value = total_distance * total_distance; // Valor cuadrático de la distancia
@@ -70,7 +70,7 @@ void calculate_pselect(float* fitness, float* pselect, int pop_size) {
     }
 }
 
-void crossover(bool** pop, int pop_size, int bit_length) {
+void crossover(int** pop, int pop_size, int bit_length) {
     for (int i = 0; i < pop_size - 1; i += 2) {
         int crossover_point = bit_length / 2; // Punto de cruce siempre en la mitad
         for (int j = crossover_point; j < bit_length; ++j) {
@@ -79,17 +79,17 @@ void crossover(bool** pop, int pop_size, int bit_length) {
     }
 }
 
-void mutation(bool** pop, int pop_size, int bit_length, int mutation_rate) {
+void mutation(int** pop, int pop_size, int bit_length, int mutation_rate) {
     for (int i = 0; i < pop_size; ++i) {
         for (int j = 0; j < bit_length; ++j) {
             if (rand() % 100 < mutation_rate) { // Suponiendo mutation_rate en porcentaje (0-100)
-                pop[i][j] != pop[i][j]; // Mutación complementaria (0 a 1 o 1 a 0)
+                pop[i][j] = 1 - pop[i][j]; // Mutación complementaria (0 a 1 o 1 a 0)
             }
         }
     }
 }
 
-void print_best_individual(bool** pop, float* fitness, double* distances, int pop_size, int city_size) {
+void print_best_individual(int** pop, float* fitness, double* distances, int pop_size, int city_size) {
     int best_idx = 0;
     float best_fitness = fitness[0];
     for (int i = 1; i < pop_size; ++i) {
@@ -117,9 +117,9 @@ int main() {
 
     int pop_size = 10;
     int bit_length = city_size; // Cada individuo en la población tiene 'city_size' bits
-    bool** pop = new bool*[pop_size];
+    int** pop = new int*[pop_size];
     for (int i = 0; i < pop_size; ++i) {
-        pop[i] = new bool[bit_length];
+        pop[i] = new int[bit_length];
     }
     generate_bits(pop, pop_size, bit_length);
 
@@ -152,7 +152,7 @@ int main() {
         }
 
         crossover(pop, pop_size, bit_length);
-        mutation(pop, pop_size, bit_length, 0.1);
+        mutation(pop, pop_size, bit_length, 10);
 
         iteration++;
     }
