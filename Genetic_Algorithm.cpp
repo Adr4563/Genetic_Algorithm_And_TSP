@@ -34,10 +34,16 @@ void generate_routes(int** pop, int pop_size, int city_size) {
     }
 }
 
-void generate_coordinates(City* cities, int city_size, int max) {
+void generate_predefined_coordinates(City* cities, int city_size) {
+    int predefined_coords[10][2] = {
+        {-150, -100}, {50, 60}, {-50, 30}, {100, -120},
+        {180, 50}, {-80, -50}, {130, -170}, {170, 120},
+        {-200, 180}, {140, 40}
+    };
+
     for (int i = 0; i < city_size; ++i) {
-        cities[i].x = rand() % max;
-        cities[i].y = rand() % max;
+        cities[i].x = predefined_coords[i][0];
+        cities[i].y = predefined_coords[i][1];
         cities[i].order = i;
     }
 }
@@ -167,9 +173,9 @@ int main() {
     int max = 600;
 
     City* cities = new City[city_size];
-    generate_coordinates(cities, city_size, max);
+    generate_predefined_coordinates(cities, city_size);
 
-    int pop_size = 8;
+    int pop_size = 1000;
     int** pop = new int*[pop_size];
     for (int i = 0; i < pop_size; ++i) {
         pop[i] = new int[city_size];
@@ -193,9 +199,9 @@ int main() {
         best_route[i] = pop[best_index][i];
     }
 
-    int iterations = 300;
+    int generations = 3000;
     int iter = 0;
-    while (iter < iterations) {
+    while (iter < generations) {
         // Seleccionar los mejores individuos [121, 150, 160, 1245]
         int num_best = 2;
         int* best_indices = new int[num_best];
