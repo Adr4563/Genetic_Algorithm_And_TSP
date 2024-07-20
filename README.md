@@ -44,7 +44,7 @@ Introducing random changes to a solution to maintain genetic diversity.
 6. **Crossover 🔄:** Performs crossover between two parents to generate new individuals.
 7. **Mutate 🧬:** Applies mutations to the new individuals.
 8. **Update Population 🔄:** Updates the population with the new individuals.
-9. **Iterations 🔁:** Repeats the process for a specified number of iterations or until a satisfactory solution is found.
+9. **Generations 🔁:** Refers to new segments of the process that are repeated with the goal of achieving convergence. Each generation involves evaluating, selecting, and evolving the population to improve the solution over successive iterations until a satisfactory result is found or a convergence criterion is met.
 
 
 # Deploy in Scratch 🛠️
