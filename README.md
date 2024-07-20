@@ -2,7 +2,7 @@
 
 ### **Contents** 📚
   - [Introduction 📖](#introduction-)
-  - [Theoretical Framework 📘](#theoretical-framework)
+  - [Theoretical Framework 📘](#theoretical-framework-)
   - [Deploy in Scratch 🛠️](#deploy-in-scratch-)
 
 # Introduction 📖
