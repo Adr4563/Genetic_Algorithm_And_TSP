@@ -1,4 +1,4 @@
-# Genetic Algorithm TSP
+# Genetic Algorithm & TSP
 
 ### **Contents** 📚
   - [Introduction 📖](#introduction-)
